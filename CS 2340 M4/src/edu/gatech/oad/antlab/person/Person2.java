@@ -53,6 +53,6 @@ public class Person2 {
 	
 	public static void main(String[] args) {
 		Person2 a = new Person2("Yiqi");
-		System.out.println(a.calc("abcdefg"));
+		System.out.println(a.toString("abcdefg"));
 	}
 }
