@@ -2,7 +2,7 @@ package edu.gatech.oad.antlab.pkg1;
 
 //if you get an error on this import
 //you do not have resources.jar on the classpath
-import edu.cs2335.antlab.pkg3.*;
+import edu.cs2340.antlab.pkg3.*;
 import edu.gatech.oad.antlab.person.*;
 import edu.gatech.oad.antlab.pkg2.*;
 
