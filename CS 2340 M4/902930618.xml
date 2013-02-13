@@ -30,14 +30,10 @@
 
   <target name="javadoc" depends="prepare">
     <javadoc sourcepath="${src.dir}" access="public" destdir="${javadoc.dir}">
-      <fileset dir="${src.dir}">
-        <include name="**/*.java" />
-      </fileset>
       <classpath>
         <fileset dir="${library.dir}">
           <include name="*.jar"/>
         </fileset>
-        <pathelement path="${build.dir}"/>
       </classpath>
     </javadoc>
   </target>
