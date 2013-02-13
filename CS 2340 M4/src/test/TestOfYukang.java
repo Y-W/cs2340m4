@@ -15,7 +15,7 @@ public class TestOfYukang {
 		Person4 p4 = new Person4("p4");
 		assertEquals("p4tg123bg", p4.toString("gtg123b"));
 		Person3 p3 = new Person3("p3");
-		assertEquals("p4tg123bg", p3.toString("gb321gt4p"));
+		assertEquals("p3p4tg123bg", p3.toString("gb321gt4p"));
 	}
 
 }
