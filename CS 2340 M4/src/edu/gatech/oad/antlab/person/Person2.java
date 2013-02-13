@@ -50,9 +50,5 @@ public class Person2 {
 	public String toString(String input) {
 	  return name + calc(input);
 	}
-	
-	public static void main(String[] args) {
-		Person2 a = new Person2("Yiqi");
-		System.out.println(a.toString("abcdefg"));
-	}
+
 }
