@@ -1,4 +1,5 @@
-<<<<<<< .mine
 Yijie Wang 902930618
 
-another useless change
+Extra Credit:
+Uses manifestclasspath to automatically include all external jars in the library into the manifest.
+Useful because then you don't have to specify what to include.
