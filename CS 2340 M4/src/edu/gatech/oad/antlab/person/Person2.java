@@ -34,8 +34,8 @@ public class Person2 {
 		  return input;
 	  }
 	  else {
-		  java.util.Random ran = new Random();
-		  int i = ran.nextInt(input.length);
+		  java.util.Random ran = new java.util.Random();
+		  int i = ran.nextInt(input.length());
 		  return input.substring(i, i+1) + calc(input.substring(0, i) + input.substring(i+1));
 	  }
 	}
