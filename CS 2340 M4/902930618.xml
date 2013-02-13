@@ -1,0 +1,77 @@
+<project name="team27M4" default="all" basedir=".">
+    <description>
+        Yijie Wang's ant file, in 3**3 team 27, for CS2340.
+    </description>
+
+  <target name="init">
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="jar.name"  value="AntLabRun"/>
+    <property name="javadoc.dir" value="apidoc"/>
+    <property name="library.dir" value="lib"/>
+  </target>
+  
+  <target name="prepare" depends="init">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${javadoc.dir}"/>
+  </target>
+
+  <target name="compile" depends="prepare">
+    <javac destdir="${build.dir}" includeantruntime="false">
+      <src path="${src.dir}"/>
+      <classpath>
+        <fileset dir="${library.dir}">
+          <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${build.dir}"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="javadoc" depends="prepare">
+    <javadoc sourcepath="${src.dir}" access="public" destdir="${javadoc.dir}">
+      <fileset dir="${src.dir}">
+        <include name="**/*.java" />
+      </fileset>
+      <classpath>
+        <fileset dir="${library.dir}">
+          <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${build.dir}"/>
+      </classpath>
+    </javadoc>
+  </target>
+  
+  <path id="libListPath">
+    <fileset dir="lib">
+      <include name="**.jar"/>
+    </fileset>
+  </path>
+  
+  <manifestclasspath property="lib.list" jarfile="${jar.name}.jar">
+    <classpath refid="libListPath" />
+  </manifestclasspath>
+
+  <target name="jar" depends="compile">
+    <jar destfile="${jar.name}.jar" >
+      <fileset dir="${build.dir}" />
+      <manifest>
+        <attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+        <attribute name="Class-Path" value="${lib.list}" />
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="run" depends="jar">
+    <java jar="${jar.name}.jar" fork="true" />
+  </target>
+
+  <target name="all" depends="run, javadoc">
+  </target>
+
+  <target name="clean" depends="init">
+    <delete dir="${build.dir}"/>
+    <delete dir="./${javadoc.dir}"/>
+    <delete file="./${jar.name}.jar"/>
+  </target>
+</project>
