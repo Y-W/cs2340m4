@@ -1,17 +1,12 @@
 package edu.gatech.oad.antlab.person;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 /**
  *  A simple class for person 3
  *  returns their name and a
  *  reversed string 
  *  
  *  @author  Yijie Wang
- *  @version 0.1
+ *  @version 0.2
  */
 public class Person3 {
    /** Holds the persons real name */  
