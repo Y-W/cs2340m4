@@ -16,8 +16,13 @@
 		<mkdir dir="${javadoc.dir}"/>
 	</target>
 	
-	<target name = "compile" depends="init">
-		<javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false"/>
+	<target name="compile" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+			<classpath>
+			    <pathelement path="${build.dir}"/>
+			    <pathelement path="${library.dir}/resources.jar"/>
+			</classpath>
+		</javac>
 	</target>
 	
 	<target name = "javadoc">
@@ -34,7 +39,7 @@
 		<jar destfile="${jar.dir}.jar" basedir="${build.dir}" >
 			<manifest>
 				<attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
-				<attribute name="Class-Path" value="lib/resources.jar" />
+				<attribute name="Class-Path" value="${library.dir}/resources.jar" />
 			</manifest>
 		</jar>
 	</target>
@@ -46,10 +51,10 @@
 	<target name = "all" depends="run,javadoc">
 	</target>
 	
-	<target name = "clean">
+	<target name = "clean" depends = "init">
 		<delete dir="${build.dir}"/>
 		<delete dir="${javadoc.dir}"/>
-		<delete file="./${jar.dir}.jar"/>
+		<delete file="${jar.dir}.jar"/>
 	</target>
 		
 </project>
