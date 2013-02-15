@@ -1,0 +1,55 @@
+<project name="3**3M4" default="all" basedir=".">
+	<description>
+		Team27 3**3, M4, Author: Jingyuan Hu
+	</description>
+	
+	<target name = "init">
+		<property name="src.dir" value="src"/>
+		<property name="build.dir" value="build"/>
+		<property name="jar.dir" value="AntLabRun"/>
+		<property name="javadoc.dir" value="apidoc"/>
+		 <property name="library.dir" value="lib"/>
+	</target>
+	
+	<target name = "prepare" depends="init">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${javadoc.dir}"/>
+	</target>
+	
+	<target name = "compile" depends="init">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false"/>
+	</target>
+	
+	<target name = "javadoc">
+		   <javadoc sourcepath="${src.dir}" access="public" destdir="${javadoc.dir}">
+		   	<classpath>
+		   	        <fileset dir="${library.dir}">
+		   	          <include name="*.jar"/>
+		   	        </fileset>
+		   	      </classpath>
+		    </javadoc>
+		  </target>
+	
+	<target name = "jar" depends="compile">
+		<jar destfile="${jar.dir}.jar" basedir="${build.dir}" >
+			<manifest>
+				<attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+				<attribute name="Class-Path" value="lib/resources.jar" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name = "run" depends="jar">
+		<java jar="${jar.dir}.jar" fork="true"/>
+	</target>
+	
+	<target name = "all" depends="run,javadoc">
+	</target>
+	
+	<target name = "clean">
+		<delete dir="${build.dir}"/>
+		<delete dir="${javadoc.dir}"/>
+		<delete file="./${jar.dir}.jar"/>
+	</target>
+		
+</project>
