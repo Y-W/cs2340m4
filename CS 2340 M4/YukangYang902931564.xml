@@ -1,0 +1,74 @@
+<!--ant CS 2340 M4 Yukang Yang-->
+<!--build.xml-->
+
+<project name="M4Yukang" basedir="." default="all">
+	
+	<target name="init">
+		<property name="src.dir" value="src"/>
+		<property name="build.dir" value="build"/>
+		<property name="classes.dir" value="${build.dir}/classes"/>
+		<property name="javadoc.dir" value="Documentation"/>
+		<property name="jar.dir" value="${build.dir}/jar"/>
+		<property name="library.dir" value="lib" />
+		<property name="jar.name" value="M4Yukang"/>
+		<property name="main-class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+	</target>
+	
+	<target name="prepare" depends="init">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${javadoc.dir}"/>
+		<mkdir dir="${jar.dir}"/>
+		<mkdir dir="${classes.dir}"/>
+	</target>
+	
+	<target name="compile" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false">
+			<classpath>
+			    <pathelement path="${classes.dir}"/>
+			    <pathelement path="${library.dir}/resources.jar"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="javadoc" depends="compile">
+		<javadoc destdir="${javadoc.dir}"
+				 sourcepath="${src.dir}"
+				 access="public"
+			     author="team 27 M4 3**3"
+			     version="1.0"
+			     windowtitle="JAVA DOC">
+			<classpath>
+		        <fileset dir="${library.dir}">
+		          	<include name="*.jar"/>
+		        </fileset>
+	      	</classpath>
+		</javadoc>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="${jar.dir}/${jar.name}.jar">
+			<fileset dir="${classes.dir}"/>
+		    <zipfileset includes="**/*.class" src="${library.dir}/resources.jar"/>
+		    <manifest>
+		      <attribute name="Main-Class"
+		            value="${main-class}"/>
+		    </manifest>
+		</jar>
+	</target>
+	
+	<target name="run" depends="jar">
+		<java jar="${jar.dir}/${jar.name}.jar" fork="true"/>
+	</target>
+	
+	<target name="all" depends="javadoc, run" >
+	</target>
+	
+	<target name="clean" depends="init">
+		<delete file="${jar.dir}/${jar.name}.jar"/>
+		<delete dir="${classes.dir}"/>
+		<delete dir="${jar.dir}"/>
+		<delete dir="${build.dir}"/>
+		<delete dir="${javadoc.dir}"/>
+	</target>
+	
+</project>
